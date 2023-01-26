@@ -9,8 +9,8 @@ import (
 	"sort"
 	"strconv"
 
-	"github.com/moov-io/iso8583/field"
-	"github.com/moov-io/iso8583/utils"
+	"github.com/mercadolibre/iso8583/field"
+	"github.com/mercadolibre/iso8583/utils"
 )
 
 var _ json.Marshaler = (*Message)(nil)

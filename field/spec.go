@@ -3,10 +3,10 @@ package field
 import (
 	"reflect"
 
-	"github.com/moov-io/iso8583/encoding"
-	"github.com/moov-io/iso8583/padding"
-	"github.com/moov-io/iso8583/prefix"
-	"github.com/moov-io/iso8583/sort"
+	"github.com/mercadolibre/iso8583/encoding"
+	"github.com/mercadolibre/iso8583/padding"
+	"github.com/mercadolibre/iso8583/prefix"
+	"github.com/mercadolibre/iso8583/sort"
 )
 
 // TagSpec is used to define the format of field tags (sometimes defined as field IDs).
@@ -55,6 +55,9 @@ type Spec struct {
 	// Subfields defines the subfields held within the field. Only
 	// applicable to composite field types.
 	Subfields map[string]Field
+	// BitmapOptions could be used on a bitmap field, and is optional.
+	// Contains options that modifies the behaviour of the bitmap.
+	BitmapOptions *BitmapOptions
 }
 
 func NewSpec(length int, desc string, enc encoding.Encoder, pref prefix.Prefixer) *Spec {

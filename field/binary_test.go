@@ -3,8 +3,8 @@ package field
 import (
 	"testing"
 
-	"github.com/moov-io/iso8583/encoding"
-	"github.com/moov-io/iso8583/prefix"
+	"github.com/mercadolibre/iso8583/encoding"
+	"github.com/mercadolibre/iso8583/prefix"
 	"github.com/stretchr/testify/require"
 )
 

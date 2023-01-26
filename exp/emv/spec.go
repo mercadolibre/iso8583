@@ -1,10 +1,10 @@
 package emv
 
 import (
-	"github.com/moov-io/iso8583/encoding"
-	"github.com/moov-io/iso8583/field"
-	"github.com/moov-io/iso8583/prefix"
-	"github.com/moov-io/iso8583/sort"
+	"github.com/mercadolibre/iso8583/encoding"
+	"github.com/mercadolibre/iso8583/field"
+	"github.com/mercadolibre/iso8583/prefix"
+	"github.com/mercadolibre/iso8583/sort"
 )
 
 var Spec = &field.Spec{

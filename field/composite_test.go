@@ -6,10 +6,10 @@ import (
 	"strconv"
 	"testing"
 
-	"github.com/moov-io/iso8583/encoding"
-	"github.com/moov-io/iso8583/padding"
-	"github.com/moov-io/iso8583/prefix"
-	"github.com/moov-io/iso8583/sort"
+	"github.com/mercadolibre/iso8583/encoding"
+	"github.com/mercadolibre/iso8583/padding"
+	"github.com/mercadolibre/iso8583/prefix"
+	"github.com/mercadolibre/iso8583/sort"
 	"github.com/stretchr/testify/require"
 )
 
@@ -979,8 +979,8 @@ func TestCompositePanicsOnSpecValidationFailures(t *testing.T) {
 		spec *Spec
 	}{
 		{
-			desc: "panics on nil Tag being defined in spec",
-			err:  "Composite spec requires a Tag.Sort function to be defined",
+			desc: "panics on nil Tag and no Bitmap being defined in spec",
+			err:  "Composite spec requires a Tag.Sort function or a BitmapSpec to be defined",
 			spec: &Spec{
 				Length:    6,
 				Pref:      prefix.ASCII.Fixed,
@@ -989,8 +989,8 @@ func TestCompositePanicsOnSpecValidationFailures(t *testing.T) {
 			},
 		},
 		{
-			desc: "panics on nil Tag.Sort being defined in spec",
-			err:  "Composite spec requires a Tag.Sort function to be defined",
+			desc: "panics on nil Tag and no Bitmap being defined in spec",
+			err:  "Composite spec requires a Tag.Sort function or a BitmapSpec to be defined",
 			spec: &Spec{
 				Length:    6,
 				Pref:      prefix.ASCII.Fixed,

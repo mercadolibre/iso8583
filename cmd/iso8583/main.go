@@ -7,7 +7,7 @@ import (
 	"path/filepath"
 	"strings"
 
-	"github.com/moov-io/iso8583"
+	"github.com/mercadolibre/iso8583"
 )
 
 var (

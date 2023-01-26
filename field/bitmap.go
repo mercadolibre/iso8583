@@ -6,23 +6,30 @@ import (
 	"github.com/moov-io/iso8583/utils"
 )
 
-const minBitmapLength = 8 // 64 bit, 8 bytes, or 16 hex digits
-const maxBitmaps = 3
+const (
+	defaultBitmapSize = 8
+	defaultMaxBitmaps = 3
+)
 
 var _ Field = (*Bitmap)(nil)
 
 // NOTE: Bitmap does not support JSON encoding or decoding.
 type Bitmap struct {
-	spec   *Spec
-	bitmap *utils.Bitmap
-	data   *Bitmap
+	spec    *Spec
+	bitmap  *utils.Bitmap
+	data    *Bitmap
+	options *BitmapOptions
+}
+
+type BitmapOptions struct {
+	MaxBitmaps int
+	BitmapSize int
 }
 
 func NewBitmap(spec *Spec) *Bitmap {
-	return &Bitmap{
-		spec:   spec,
-		bitmap: utils.NewBitmap(64 * maxBitmaps),
-	}
+	bm := &Bitmap{}
+	bm.SetSpec(spec)
+	return bm
 }
 
 func (f *Bitmap) Spec() *Spec {
@@ -30,7 +37,22 @@ func (f *Bitmap) Spec() *Spec {
 }
 
 func (f *Bitmap) SetSpec(spec *Spec) {
+	bmo := (*BitmapOptions)(nil)
+	if spec != nil {
+		bmo = spec.BitmapOptions
+	}
+	if bmo == nil {
+		bmo = &BitmapOptions{}
+	}
+	if bmo.MaxBitmaps == 0 {
+		bmo.MaxBitmaps = defaultMaxBitmaps
+	}
+	if bmo.BitmapSize == 0 {
+		bmo.BitmapSize = defaultBitmapSize
+	}
+	f.options = bmo
 	f.spec = spec
+	f.Reset()
 }
 
 func (f *Bitmap) SetBytes(b []byte) error {
@@ -66,7 +88,7 @@ func (f *Bitmap) Pack() ([]byte, error) {
 		return nil, fmt.Errorf("failed to retrieve bytes: %w", err)
 	}
 
-	data = data[0 : 8*count]
+	data = data[0 : f.options.BitmapSize*count]
 
 	packed, err := f.spec.Enc.Encode(data)
 	if err != nil {
@@ -81,7 +103,7 @@ func (f *Bitmap) Pack() ([]byte, error) {
 // if secondary bitmap presents (bit 1 is set) we return 16 bytes (or 32 for hex encoding)
 // and so on for maxBitmaps
 func (f *Bitmap) Unpack(data []byte) (int, error) {
-	minLen, _, err := f.spec.Pref.DecodeLength(minBitmapLength, data)
+	minLen, _, err := f.spec.Pref.DecodeLength(f.options.BitmapSize, data)
 	if err != nil {
 		return 0, fmt.Errorf("failed to decode length: %w", err)
 	}
@@ -90,7 +112,7 @@ func (f *Bitmap) Unpack(data []byte) (int, error) {
 	read := 0
 
 	// read max
-	for i := 0; i < maxBitmaps; i++ {
+	for i := 0; i < f.options.MaxBitmaps; i++ {
 		decoded, readDecoded, err := f.spec.Enc.Decode(data[read:], minLen)
 		if err != nil {
 			return 0, fmt.Errorf("failed to decode content for %d bitmap: %w", i+1, err)
@@ -150,7 +172,7 @@ func (f *Bitmap) Marshal(data interface{}) error {
 }
 
 func (f *Bitmap) Reset() {
-	f.bitmap = utils.NewBitmap(64 * maxBitmaps)
+	f.bitmap = utils.NewBitmap(f.options.BitmapSize * 8 * f.options.MaxBitmaps)
 }
 
 func (f *Bitmap) Set(i int) {
@@ -167,7 +189,7 @@ func (f *Bitmap) Len() int {
 
 func (f *Bitmap) bitmapsCount() int {
 	count := 1
-	for i := 0; i < maxBitmaps; i++ {
+	for i := 0; i < f.options.MaxBitmaps-1; i++ {
 		if f.IsSet(i*64 + 1) {
 			count += 1
 		}
@@ -184,7 +206,7 @@ func (f *Bitmap) setBitmapFields() bool {
 	// bitmap bit 65
 
 	// start from the 2nd bitmap as for the 1st bitmap we don't need to set any bits
-	for bitmapIndex := 2; bitmapIndex <= maxBitmaps; bitmapIndex++ {
+	for bitmapIndex := 2; bitmapIndex <= f.options.MaxBitmaps; bitmapIndex++ {
 
 		// are there fields for this (bitmapIndex) bitmap?
 		bitmapStart := (bitmapIndex-1)*64 + 2 // we skip firt bit as it's for the next bitmap

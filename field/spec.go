@@ -55,6 +55,9 @@ type Spec struct {
 	// Subfields defines the subfields held within the field. Only
 	// applicable to composite field types.
 	Subfields map[string]Field
+	// BitmapOptions could be used on a bitmap field, and is optional.
+	// Contains options that modifies the behaviour of the bitmap.
+	BitmapOptions *BitmapOptions
 }
 
 func NewSpec(length int, desc string, enc encoding.Encoder, pref prefix.Prefixer) *Spec {

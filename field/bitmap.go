@@ -3,7 +3,7 @@ package field
 import (
 	"fmt"
 
-	"github.com/moov-io/iso8583/utils"
+	"github.com/mercadolibre/iso8583/utils"
 )
 
 const minBitmapLength = 8 // 64 bit, 8 bytes, or 16 hex digits

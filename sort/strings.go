@@ -6,7 +6,7 @@ import (
 	"sort"
 	"strconv"
 
-	"github.com/moov-io/iso8583/encoding"
+	"github.com/mercadolibre/iso8583/encoding"
 )
 
 // Strings is a function type used to sort a slice of strings in increasing

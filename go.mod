@@ -1,4 +1,4 @@
-module github.com/moov-io/iso8583
+module github.com/mercadolibre/iso8583
 
 go 1.19
 

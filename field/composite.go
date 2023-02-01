@@ -7,9 +7,9 @@ import (
 	"reflect"
 	"regexp"
 
-	"github.com/moov-io/iso8583/padding"
-	"github.com/moov-io/iso8583/sort"
-	"github.com/moov-io/iso8583/utils"
+	"github.com/mercadolibre/iso8583/padding"
+	"github.com/mercadolibre/iso8583/sort"
+	"github.com/mercadolibre/iso8583/utils"
 )
 
 var _ Field = (*Composite)(nil)

@@ -6,7 +6,7 @@ import (
 	"fmt"
 	"strconv"
 
-	"github.com/moov-io/iso8583/utils"
+	"github.com/mercadolibre/iso8583/utils"
 )
 
 var _ Field = (*Numeric)(nil)

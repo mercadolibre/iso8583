@@ -1,6 +1,6 @@
 package emv
 
-import "github.com/moov-io/iso8583/field"
+import "github.com/mercadolibre/iso8583/field"
 
 type Data struct {
 	AcquirerIdentifier                                          *field.String  `index:"9F01"`

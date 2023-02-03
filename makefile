@@ -23,7 +23,7 @@ install:
 	go mod vendor
 
 build:
-	go build -mod=vendor -ldflags "-X github.com/moov-io/iso8583.Version=${VERSION}" -o bin/iso8583 github.com/moov-io/iso8583/cmd/iso8583
+	go build -mod=vendor -ldflags "-X github.com/mercadolibre/iso8583.Version=${VERSION}" -o bin/iso8583 github.com/mercadolibre/iso8583/cmd/iso8583
 
 .PHONY: setup
 setup:
@@ -58,7 +58,7 @@ run: update build
 	./bin/iso8583
 
 test: update
-	go test -cover github.com/moov-io/iso8583/...
+	go test -cover github.com/mercadolibre/iso8583/...
 
 .PHONY: clean
 clean:

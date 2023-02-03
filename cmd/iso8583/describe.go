@@ -5,8 +5,8 @@ import (
 	"io"
 	"os"
 
-	"github.com/moov-io/iso8583"
-	"github.com/moov-io/iso8583/specs"
+	"github.com/mercadolibre/iso8583"
+	"github.com/mercadolibre/iso8583/specs"
 )
 
 var availableSpecs = map[string]*iso8583.MessageSpec{

@@ -1,7 +1,7 @@
 [![Moov Banner Logo](https://user-images.githubusercontent.com/20115216/104214617-885b3c80-53ec-11eb-8ce0-9fc745fb5bfc.png)](https://github.com/moov-io)
 
 <p align="center">
-  <a href="https://github.com/moov-io/iso8583/tree/master/docs">Project Documentation</a>
+  <a href="https://github.com/mercadolibre/iso8583/tree/master/docs">Project Documentation</a>
   ·
   <a href="https://slack.moov.io/">Community</a>
   ·
@@ -10,14 +10,14 @@
   <br>
 </p>
 
-[![GoDoc](https://godoc.org/github.com/moov-io/iso8583?status.svg)](https://godoc.org/github.com/moov-io/iso8583)
-[![Build Status](https://github.com/moov-io/iso8583/workflows/Go/badge.svg)](https://github.com/moov-io/iso8583/actions)
+[![GoDoc](https://godoc.org/github.com/mercadolibre/iso8583?status.svg)](https://godoc.org/github.com/mercadolibre/iso8583)
+[![Build Status](https://github.com/mercadolibre/iso8583/workflows/Go/badge.svg)](https://github.com/mercadolibre/iso8583/actions)
 [![Coverage Status](https://codecov.io/gh/moov-io/iso8583/branch/master/graph/badge.svg)](https://codecov.io/gh/moov-io/iso8583)
-[![Go Report Card](https://goreportcard.com/badge/github.com/moov-io/iso8583)](https://goreportcard.com/report/github.com/moov-io/iso8583)
-[![Repo Size](https://img.shields.io/github/languages/code-size/moov-io/iso8583?label=project%20size)](https://github.com/moov-io/iso8583)
+[![Go Report Card](https://goreportcard.com/badge/github.com/mercadolibre/iso8583)](https://goreportcard.com/report/github.com/mercadolibre/iso8583)
+[![Repo Size](https://img.shields.io/github/languages/code-size/moov-io/iso8583?label=project%20size)](https://github.com/mercadolibre/iso8583)
 [![Apache 2 License](https://img.shields.io/badge/license-Apache2-blue.svg)](https://raw.githubusercontent.com/moov-io/iso8583/master/LICENSE)
 [![Slack Channel](https://slack.moov.io/badge.svg?bg=e01563&fgColor=fffff)](https://slack.moov.io/)
-[![GitHub Stars](https://img.shields.io/github/stars/moov-io/iso8583)](https://github.com/moov-io/iso8583)
+[![GitHub Stars](https://img.shields.io/github/stars/moov-io/iso8583)](https://github.com/mercadolibre/iso8583)
 [![Twitter](https://img.shields.io/twitter/follow/moov?style=social)](https://twitter.com/moov?lang=en)
 
 # moov-io/iso8583
@@ -48,12 +48,12 @@ Moov ISO8583 currently offers a Go package with plans for an API in the near fut
 
 ## Go library
 
-This project uses [Go Modules](https://go.dev/blog/using-go-modules) and Go v1.18 or newer. See [Golang's install instructions](https://golang.org/doc/install) for help in setting up Go. You can download the source code and we offer [tagged and released versions](https://github.com/moov-io/iso8583/releases/latest) as well. We highly recommend you use a tagged release for production.
+This project uses [Go Modules](https://go.dev/blog/using-go-modules) and Go v1.18 or newer. See [Golang's install instructions](https://golang.org/doc/install) for help in setting up Go. You can download the source code and we offer [tagged and released versions](https://github.com/mercadolibre/iso8583/releases/latest) as well. We highly recommend you use a tagged release for production.
 
 ### Installation
 
 ```
-go get github.com/moov-io/iso8583
+go get github.com/mercadolibre/iso8583
 ```
 
 ### Define your specification
@@ -413,12 +413,12 @@ CLI suports following command:
 
 ### Installation
 
-`iso8583` CLI is available as downloadable binaries from the [releases page](https://github.com/moov-io/iso8583/releases/latest) for MacOS, Windows and Linux.
+`iso8583` CLI is available as downloadable binaries from the [releases page](https://github.com/mercadolibre/iso8583/releases/latest) for MacOS, Windows and Linux.
 
 Here is an example how to install MacOS version:
 
 ```
-wget -O ./iso8583 https://github.com/moov-io/iso8583/releases/download/v0.4.6/iso8583_0.4.6_darwin_amd64 && chmod +x ./iso8583
+wget -O ./iso8583 https://github.com/mercadolibre/iso8583/releases/download/v0.4.6/iso8583_0.4.6_darwin_amd64 && chmod +x ./iso8583
 ```
 
 Now you can run CLI:
@@ -486,18 +486,18 @@ Please, check the example of the JSON spec file [spec87ascii.json](./examples/sp
 
  channel | info
  ------- | -------
-[Project Documentation](https://github.com/moov-io/iso8583/tree/master/docs) | Our project documentation available online.
+[Project Documentation](https://github.com/mercadolibre/iso8583/tree/master/docs) | Our project documentation available online.
 Twitter [@moov](https://twitter.com/moov)	| You can follow Moov.io's Twitter feed to get updates on our project(s). You can also tweet us questions or just share blogs or stories.
-[GitHub Issue](https://github.com/moov-io/iso8583/issues/new) | If you are able to reproduce a problem please open a GitHub Issue under the specific project that caused the error.
+[GitHub Issue](https://github.com/mercadolibre/iso8583/issues/new) | If you are able to reproduce a problem please open a GitHub Issue under the specific project that caused the error.
 [moov-io slack](https://slack.moov.io/) | Join our slack channel (`#iso8583`) to have an interactive discussion about the development of the project.
 
 ## Contributing
 
 **While [Spec87ASCII](./specs/spec87ascii.go) is appropriate for most users, we hope to see improvements and variations of this specification for different systems by the community. Please do not hesitate to contribute issues, questions, or PRs to cover new use cases. Tests are also appreciated if possible!**
 
-Please review our [Contributing guide](CONTRIBUTING.md) and [Code of Conduct](CODE_OF_CONDUCT.md) to get started! Check out our [issues for first time contributors](https://github.com/moov-io/iso8583/contribute) for something to help out with.
+Please review our [Contributing guide](CONTRIBUTING.md) and [Code of Conduct](CODE_OF_CONDUCT.md) to get started! Check out our [issues for first time contributors](https://github.com/mercadolibre/iso8583/contribute) for something to help out with.
 
-This project uses [Go Modules](https://go.dev/blog/using-go-modules) and Go v1.18 or newer. See [Golang's install instructions](https://golang.org/doc/install) for help setting up Go. You can download the source code and we offer [tagged and released versions](https://github.com/moov-io/iso8583/releases/latest) as well. We highly recommend you use a tagged release for production.
+This project uses [Go Modules](https://go.dev/blog/using-go-modules) and Go v1.18 or newer. See [Golang's install instructions](https://golang.org/doc/install) for help setting up Go. You can download the source code and we offer [tagged and released versions](https://github.com/mercadolibre/iso8583/releases/latest) as well. We highly recommend you use a tagged release for production.
 
 ## Related projects
 As part of Moov's initiative to offer open source fintech infrastructure, we have a large collection of active projects you may find useful:

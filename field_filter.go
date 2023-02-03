@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"unicode/utf8"
 
-	"github.com/moov-io/iso8583/field"
+	"github.com/mercadolibre/iso8583/field"
 )
 
 const (

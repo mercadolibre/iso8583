@@ -93,17 +93,17 @@ func (p *binaryVarPrefixer) DecodeLength(maxLen int, data []byte) (int, int, err
 		return 0, 0, fmt.Errorf("not enough data length: %d to read: %d bytes", len(data), p.Digits)
 	}
 
-	lengthBytes := data[:p.Digits]
+	prefBytes := data[:p.Digits]
 
 	// it take 4 bytes to encode (u)int32
 	uint32Size := 4
 
 	// prepend with 0x00 if len of data is less than intSize (4 bytes)
-	if len(lengthBytes) < uint32Size {
-		lengthBytes = append(bytes.Repeat([]byte{0x00}, uint32Size-len(lengthBytes)), lengthBytes...)
+	if len(prefBytes) < uint32Size {
+		prefBytes = append(bytes.Repeat([]byte{0x00}, uint32Size-len(prefBytes)), prefBytes...)
 	}
 
-	dataLen, err := bytesToInt(lengthBytes)
+	dataLen, err := bytesToInt(prefBytes)
 	if err != nil {
 		return 0, 0, fmt.Errorf("decode length: %w", err)
 	}

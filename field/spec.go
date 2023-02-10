@@ -31,6 +31,10 @@ type TagSpec struct {
 	// spec must be packed. This ordering may also be used for unpacking
 	// if Spec.Tag.Enc == nil.
 	Sort sort.StringSlice
+	// SkipUnknownTLVTags is a flag which indicates whether TLV tags that are not found in
+	// the spec should be skipped or throw an error.
+	// This flag is only meant to be used in Composite fields with TLV encoding.
+	SkipUnknownTLVTags bool
 }
 
 // Spec defines the structure of a field.

@@ -335,6 +335,24 @@ func TestTLVPacking(t *testing.T) {
 		require.Equal(t, "000000000501", data.F9F02.Value())
 	})
 
+	t.Run("Unpack correctly deserialises bytes to the data struct skipping unexpected tags", func(t *testing.T) {
+		spec := *tlvTestSpec
+		spec.Tag.SkipUnknownTLVTags = true
+		composite := NewComposite(tlvTestSpec)
+
+		// Data contains tags 9F36, 9A, 9F02 and 9F37
+		read, err := composite.Unpack([]byte{0x30, 0x32, 0x36, 0x9f, 0x36, 0x2, 0x1, 0x57, 0x9a, 0x3, 0x21, 0x7, 0x20,
+			0x9f, 0x2, 0x6, 0x0, 0x0, 0x0, 0x0, 0x5, 0x1, 0x9f, 0x37, 0x4, 0x9b, 0xad, 0xbc, 0xab})
+		require.NoError(t, err)
+		require.Equal(t, 29, read)
+
+		data := &TLVTestData{}
+		require.NoError(t, composite.Unmarshal(data))
+
+		require.Equal(t, "210720", data.F9A.Value())
+		require.Equal(t, "000000000501", data.F9F02.Value())
+	})
+
 	t.Run("Pack correctly serializes data to bytes (constructed ber-tlv)", func(t *testing.T) {
 		data := &ConstructedTLVTestData{
 			F82:   NewStringValue("017f"),
@@ -398,6 +416,16 @@ func TestTLVPacking(t *testing.T) {
 		require.Equal(t, "017F", data.F82.Value())
 		require.Equal(t, "027F", data.F9F36.Value())
 		require.Equal(t, "047F", data.F9F3B.F9F45.Value())
+	})
+
+	t.Run("Unpack throws an error due unexpected tags", func(t *testing.T) {
+		spec := *tlvTestSpec
+		spec.Tag.SkipUnknownTLVTags = false
+		composite := NewComposite(tlvTestSpec)
+
+		_, err := composite.Unpack([]byte{0x30, 0x32, 0x36, 0x9f, 0x36, 0x2, 0x1, 0x57, 0x9a, 0x3, 0x21, 0x7, 0x20,
+			0x9f, 0x2, 0x6, 0x0, 0x0, 0x0, 0x0, 0x5, 0x1, 0x9f, 0x37, 0x4, 0x9b, 0xad, 0xbc, 0xab})
+		require.EqualError(t, err, "failed to unpack subfield 9F36: field not defined in Spec")
 	})
 }
 
